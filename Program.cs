@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.InteropServices;
 using System.Text;
 
 /******************* Builder *************************************************************/
@@ -92,7 +93,9 @@ app.MapPost("/login", [AllowAnonymous] async (User user, SmarthomeContext db) =>
     };
     var token = jwtTokenHandler.CreateToken(descriptor);
     var jwtToken = jwtTokenHandler.WriteToken(token);
-    return Results.Ok(jwtToken);
+    
+    var jwt = "{ \"jwt\": \"" + jwtToken + "\" }";
+    return Results.Text(jwt);
 });
 
 /************************* CRUD *****************************************************/

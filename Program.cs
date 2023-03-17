@@ -132,7 +132,7 @@ app.MapPut("/sensores/{id}", [Authorize] async (int id, Sensor s, SmarthomeConte
     sensor.Name = s.Name;
     sensor.Value = s.Value;
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(sensor);
 });
 
 app.MapDelete("/sensores/{id}", [Authorize] async (int id, SmarthomeContext db) =>
@@ -144,7 +144,7 @@ app.MapDelete("/sensores/{id}", [Authorize] async (int id, SmarthomeContext db) 
     }
     db.Sensors.Remove(sensor);
     await db.SaveChangesAsync();
-    return Results.NoContent();
+    return Results.Ok(sensor);
 });
 /*****************************************************************************************/
 
